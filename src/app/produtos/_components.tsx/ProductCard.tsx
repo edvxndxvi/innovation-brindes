@@ -19,13 +19,13 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
     return (
         <div className="flex flex-col gap-2 w-full">
             <div className="text-center">
-                <h3 className="font-bold text-lg">{nome}</h3>
+                <h3 className="font-bold text-lg line-clamp-1">{nome}</h3>
                 <span className="font-medium">{codigo}</span>
             </div>
             <div className="border border-gray-300 rounded-xs">
                 <div className="relative">
                     <Image
-                        src="https://imgprodutos.s3.us-east-2.amazonaws.com/2651/chaveiro-metal-com-nylon-1-1.jpg"
+                        src={imagem}
                         alt={nome}
                         width={233}
                         height={290}
@@ -45,7 +45,7 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
                 </div>
 
                 <div className="p-4">
-                    <p className="text-sm mb-4">{descricao}</p>
+                    <p className="text-sm mb-4 line-clamp-2 min-h-16">{descricao}</p>
                     <div className="flex flex-col gap-2">
                         <p className="text-sm font-bold">Cores:</p>
                         <ul className="grid grid-cols-6 gap-2 w-fit">

@@ -1,5 +1,4 @@
-import ProductCardSkeleton from "@/src/components/products/ProductCardSkeleton";
-import ProductGrid from "@/src/components/products/ProductGrid";
+import ProductGrid from "@/src/app/produtos/_components.tsx/ProductGrid";
 import Header from "@/src/components/section/Header";
 
 export default function Produtos() {
@@ -8,7 +7,6 @@ export default function Produtos() {
             <Header />
             <div className="container py-4">
                 <ProductGrid />
-                <ProductCardSkeleton/>
             </div>
         </div>
     );
