@@ -19,7 +19,7 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
     return (
         <div className="flex flex-col gap-2 w-full">
             <div className="text-center">
-                <h3 className="font-bold text-xl">{nome}</h3>
+                <h3 className="font-bold text-lg">{nome}</h3>
                 <span className="font-medium">{codigo}</span>
             </div>
             <div className="border border-gray-300 rounded-xs">
@@ -45,7 +45,7 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
                 </div>
 
                 <div className="p-4">
-                    <p className="text-sm">{descricao}</p>
+                    <p className="text-sm mb-4">{descricao}</p>
                     <div className="flex flex-col gap-2">
                         <p className="text-sm font-bold">Cores:</p>
                         <ul className="grid grid-cols-6 gap-2 w-fit">

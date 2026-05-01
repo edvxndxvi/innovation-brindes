@@ -1,4 +1,4 @@
-
+import ProductCardSkeleton from "@/src/components/products/ProductCardSkeleton";
 import ProductGrid from "@/src/components/products/ProductGrid";
 import Header from "@/src/components/section/Header";
 
@@ -8,7 +8,7 @@ export default function Produtos() {
             <Header />
             <div className="container py-4">
                 <ProductGrid />
-              
+                <ProductCardSkeleton/>
             </div>
         </div>
     );

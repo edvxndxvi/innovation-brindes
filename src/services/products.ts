@@ -25,7 +25,7 @@ export async function getAllProductsRequest(): Promise<Product[]>{
         codigo: +item.codigo,
         referencia: +item.referencia,
         codigo_categoria: +item.codigo_categoria,
-        preco: Number(item.preco).toFixed(2),
+        preco: Number(Number(item.preco).toFixed(2)),
         imagem: item.imagem.replace(/\\\//g, "/"),
     }));
 
