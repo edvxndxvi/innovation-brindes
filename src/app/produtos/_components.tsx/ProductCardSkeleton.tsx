@@ -1,6 +1,6 @@
 export default function ProductCardSkeleton() {
     return (
-        <div className="animate-pulse flex flex-col gap-2 w-full">
+        <div className="animate-pulse flex flex-col gap-2 w-full select-none">
             <div>
                 <div className="h-5 bg-gray-300 rounded w-3/4 mx-auto mb-1" />
                 <div className="h-4 bg-gray-300 rounded w-1/2 mx-auto" />
