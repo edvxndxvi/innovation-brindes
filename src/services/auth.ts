@@ -2,10 +2,11 @@
 
 import axios from "axios";
 import { cookies } from "next/headers";
+import { LoginResponse } from "../types/interfaces";
 
 const apiUrl = process.env.BASE_URL;
 
-export async function loginRequest(usuario: string, senha: string){
+export async function loginRequest(usuario: string, senha: string): Promise<LoginResponse> {
     const body = { email: usuario, senha };
     const config = {
         headers: {
@@ -21,11 +22,17 @@ export async function loginRequest(usuario: string, senha: string){
     const  data = response.data;
     (await cookies()).set("token", data.token_de_acesso)
 
-    data.status = +data.status
-    data.dados_usuario.codigo_usuario = +data.dados_usuario.codigo_usuario
-    data.dados_usuario.codigo_grupo = +data.dados_usuario.codigo_grupo
-    data.dados_usuario.nome_usuario = data.dados_usuario.nome_usuario.trim()
-    data.dados_usuario.nome_grupo = data.dados_usuario.nome_grupo.trim()
+    const formattedData = data.map((item: LoginResponse) => ({
+            ...item,
+            status: +item.status,
+            dados_usuario: {
+                ...item.dados_usuario,
+                codigo_usuario: +item.dados_usuario.codigo_usuario,
+                codigo_grupo: +item.dados_usuario.codigo_grupo,
+                nome_usuario: item.dados_usuario.nome_usuario.trim(),
+                nome_grupo: item.dados_usuario.nome_grupo.trim(),
+            }
+    }));
     
-    return data;
+    return formattedData;
 }

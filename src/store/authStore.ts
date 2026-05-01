@@ -1,12 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-
-interface User {
-    codigo_usuario: number;
-    nome_usuario: string;
-    codigo_grupo: number;
-    nome_grupo: string;
-}
+import { User } from '../types/interfaces';
 
 interface AuthSate {
     token: string | null;
