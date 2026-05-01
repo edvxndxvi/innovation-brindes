@@ -32,11 +32,11 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
                         loading='eager'
                     />
                     <div className="absolute bg-gray-100 p-1 top-0 right-0">
-                        <span className="text-blue-400 font-bold">EXCLUSIVO!</span>
+                        <span className="text-blue-400 font-bold" aria-label="Produto exclusivo">EXCLUSIVO!</span>
                     </div>
                     <div className="absolute bg-background border border-gray-300 border-l-0 rounded-xs rounded-tr-xl p-2 pl-20 bottom-0 left-0 flex items-center">
                         <div className="absolute -top-5 left-0 ">
-                            <PackageOpen color="#7ccf00" className="bg-white absolute w-18 h-18 inline-block mr-1" />
+                            <PackageOpen color="#7ccf00" className="bg-white absolute w-18 h-18 inline-block mr-1" aria-hidden="true"/>
                         </div>
                         <span className="font-semibold text-sm text-gray-600 inline-block w-[15ch] wrap-break-words">
                             com embalagem especial
@@ -48,11 +48,11 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
                     <p className="text-sm mb-4 line-clamp-2 min-h-16">{descricao}</p>
                     <div className="flex flex-col gap-2">
                         <p className="text-sm font-bold">Cores:</p>
-                        <ul className="grid grid-cols-6 gap-2 w-fit">
+                        <div className="grid grid-cols-6 gap-2 w-fit">
                             {cores.map((cor) => (
-                                <li key={cor} className={`${cor} w-4 h-4 rounded-full cursor-pointer`} />
+                                <button key={cor} className={`${cor} w-4 h-4 rounded-full cursor-pointer select-none`} aria-label={`Selecionar cor ${cor}`}/>
                             ))}
-                        </ul>
+                        </div>
                     </div>
 
                     <div className="flex flex-col items-end">
@@ -66,7 +66,7 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
                     </div>
                 </div>
             </div>
-            <button className="bg-lime-500 w-full uppercase text-white font-bold py-1 rounded-sm cursor-pointer hover:opacity-75">Confira</button>
+            <button className="bg-lime-500 w-full uppercase text-white font-bold py-1 rounded-sm cursor-pointer hover:opacity-75" aria-label={`Conferir produto ${nome}`}>Confira</button>
         </div>
     );
 }

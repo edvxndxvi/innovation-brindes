@@ -1,15 +1,16 @@
-'use client';
-
-import { useQuery } from '@tanstack/react-query';
 import ProductCard from './ProductCard';
-import { getAllProductsRequest } from '@/src/services/products';
 import ProductCardSkeleton from './ProductCardSkeleton';
+import { Product } from '@/src/types/interfaces';
 
-export default function ProductGrid() {
-    const { data: products, isLoading, error, refetch } = useQuery({
-        queryFn: getAllProductsRequest,
-        queryKey: ['products'],
-    });
+interface ProductGridProps {
+    products: Product[] | undefined;
+    isLoading: boolean;
+    error: Error | null;
+    refetch: () => void;
+}
+
+export default function ProductGrid({ products, isLoading, error, refetch }: ProductGridProps) {
+
 
     const showEmptyMessage = !isLoading && !error && products?.length === 0;
     const showProducts = !isLoading && !error && products && products.length > 0;

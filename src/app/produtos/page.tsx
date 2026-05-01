@@ -1,13 +1,11 @@
-import ProductGrid from "@/src/app/produtos/_components.tsx/ProductGrid";
-import Header from "@/src/components/section/Header";
+import Header from '@/src/components/section/Header';
+import ProductsSection from './_components.tsx/ProductsSection';
 
 export default function Produtos() {
     return (
         <div className="w-full h-screen">
             <Header />
-            <div className="container py-4">
-                <ProductGrid />
-            </div>
+            <ProductsSection />
         </div>
     );
 }
