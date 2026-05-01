@@ -9,11 +9,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginRequest } from '@/src/services/auth';
 import { useAuthStore } from '@/src/store/authStore';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [responseError, setResponseError] = useState('');
     const { setLogin } = useAuthStore();
+    const router = useRouter();
 
     const {
         control,
@@ -40,11 +42,10 @@ export default function LoginForm() {
 
             const { token_de_acesso: token, dados_usuario: user } = response;
             setLogin(token, user, isChecked);
-
+            router.push('/produtos');
             // Todo: redirecionar para /produtos
         } catch (err: any) {
             setResponseError('Algo deu errado com nosso servidor, tente novamente em alguns minutos.');
-            console.log(err);
         }
     };
 

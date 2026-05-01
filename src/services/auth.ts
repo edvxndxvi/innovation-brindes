@@ -1,6 +1,7 @@
 'use server';
 
 import axios from "axios";
+import { cookies } from "next/headers";
 
 const apiUrl = process.env.BASE_URL;
 
@@ -17,7 +18,8 @@ export async function loginRequest(usuario: string, senha: string){
         config
     )
 
-    const  data = response.data
+    const  data = response.data;
+    (await cookies()).set("token", data.token_de_acesso)
 
     data.status = +data.status
     data.dados_usuario.codigo_usuario = +data.dados_usuario.codigo_usuario
