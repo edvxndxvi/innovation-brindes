@@ -6,7 +6,7 @@ import { Product } from '../types/interfaces';
 
 const apiUrl = process.env.BASE_URL;
 
-export async function getAllProductsRequest(): Promise<Product[]>{
+export async function getAllProductsRequest(): Promise<Product[]> {
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
@@ -20,13 +20,42 @@ export async function getAllProductsRequest(): Promise<Product[]>{
 
     const data = response.data;
 
-   const formattedData = data.map((item: Product) => ({
+    const formattedData = data.map((item: Product) => ({
         ...item,
         codigo: +item.codigo,
         referencia: +item.referencia,
         codigo_categoria: +item.codigo_categoria,
         preco: Number(Number(item.preco).toFixed(2)),
-        imagem: item.imagem.replace(/\\\//g, "/"),
+        imagem: item.imagem.replace(/\\\//g, '/'),
+    }));
+
+    return formattedData;
+}
+
+export async function searchProductsRequest(busca: string): Promise<Product[]> {
+    const cookieStore = await cookies();
+    const token = cookieStore.get('token')?.value;
+
+    const isNumeric = !isNaN(Number(busca)) && busca !== '';
+    const body = isNumeric ? { nome_produto: '', codigo_produto: busca } : { nome_produto: busca, codigo_produto: '' };
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    const response = await axios.post(`${apiUrl}/api/innova-dinamica/produtos/listar`, body, config);
+
+    const data = response.data;
+
+    const formattedData = data.map((item: Product) => ({
+        ...item,
+        codigo: +item.codigo,
+        referencia: +item.referencia,
+        codigo_categoria: +item.codigo_categoria,
+        preco: Number(Number(item.preco).toFixed(2)),
+        imagem: item.imagem.replace(/\\\//g, '/'),
     }));
 
     return formattedData;

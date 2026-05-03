@@ -17,7 +17,7 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
     ];
 
     return (
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 w-full :max-w-[250px]">
             <div className="text-center">
                 <h3 className="font-bold text-lg line-clamp-1">{nome}</h3>
                 <span className="font-medium">{codigo}</span>

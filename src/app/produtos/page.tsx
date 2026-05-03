@@ -1,5 +1,5 @@
 import Header from '@/src/components/section/Header';
-import ProductsSection from './_components.tsx/ProductsSection';
+import ProductsSection from './_components/ProductsSection';
 
 export default function Produtos() {
     return (
