@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { Product } from '../types/interfaces';
+import { normalizeProducts } from '../lib/utils';
 
 const apiUrl = process.env.BASE_URL;
 
@@ -20,16 +21,7 @@ export async function getAllProductsRequest(): Promise<Product[]> {
 
     const data = response.data;
 
-    const formattedData = data.map((item: Product) => ({
-        ...item,
-        codigo: +item.codigo,
-        referencia: +item.referencia,
-        codigo_categoria: +item.codigo_categoria,
-        preco: Number(Number(item.preco).toFixed(2)),
-        imagem: item.imagem.replace(/\\\//g, '/'),
-    }));
-
-    return formattedData;
+    return normalizeProducts(data);
 }
 
 export async function searchProductsRequest(busca: string): Promise<Product[]> {
@@ -49,14 +41,5 @@ export async function searchProductsRequest(busca: string): Promise<Product[]> {
 
     const data = response.data;
 
-    const formattedData = data.map((item: Product) => ({
-        ...item,
-        codigo: +item.codigo,
-        referencia: +item.referencia,
-        codigo_categoria: +item.codigo_categoria,
-        preco: Number(Number(item.preco).toFixed(2)),
-        imagem: item.imagem.replace(/\\\//g, '/'),
-    }));
-
-    return formattedData;
+    return normalizeProducts(data);
 }
