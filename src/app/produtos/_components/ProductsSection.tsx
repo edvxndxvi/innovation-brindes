@@ -33,7 +33,7 @@ export default function ProductsSection() {
 
     return (
         <div className="container py-4 flex flex-col gap-4">
-            <div className='flex justify-between'>
+            <div className='flex flex-col sm:flex-row justify-between'>
                 <SearchInput value={busca} onChange={(e) => setBusca(e.target.value)} />
                 <SelectOrder value={ordenar} onChange={setOrdenar} />
             </div>
