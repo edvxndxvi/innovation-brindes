@@ -1,7 +1,7 @@
 'use client';
 
 import { Lock, User } from 'lucide-react';
-import Input from './Input';
+import Input from '../../../components/ui/Input';
 import Link from 'next/link';
 import { Controller, useForm } from 'react-hook-form';
 import { LoginFormData, loginSchema } from '@/src/schemas/authSchema';

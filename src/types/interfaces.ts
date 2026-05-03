@@ -20,3 +20,5 @@ export interface Product {
     preco: number;
     descricao: string;
 }
+
+export type Ordenacao = 'preco_asc' | 'preco_desc' | 'nome_asc' | 'nome_desc' | '';
