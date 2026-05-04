@@ -5,10 +5,9 @@ import { useFavoritesStore } from '@/src/store/favoriteStore';
 
 export default function Modal() {
     const { selectedProduct, closeModal } = useModalStore();
-    const { isFavorite, toggleFavorite } = useFavoritesStore(); 
+    const { isFavorite, toggleFavorite } = useFavoritesStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
 
-    
     useEffect(() => {
         const dialog = dialogRef.current;
 
@@ -30,20 +29,30 @@ export default function Modal() {
     if (!selectedProduct) return null;
 
     return (
-        <dialog ref={dialogRef} onClose={closeModal} className="backdrop:bg-black/50 rounded-sm m-auto" aria-labelledby="modal-title">
+        <dialog
+            ref={dialogRef}
+            onClose={closeModal}
+            className="backdrop:bg-black/50 rounded-sm m-auto"
+            aria-labelledby="modal-title"
+        >
             <div className="bg-white p-6 w-full max-w-md">
-                <h2 id="modal-title" className="sr-only">{selectedProduct.nome}</h2>
+                <h2 id="modal-title" className="sr-only">
+                    {selectedProduct.nome}
+                </h2>
                 <ProductCard
-                        codigo={selectedProduct.codigo}
-                        nome={selectedProduct.nome}
-                        imagem={selectedProduct.imagem}
-                        preco={selectedProduct.preco}
-                        descricao={selectedProduct.descricao}
-                        isFavorite={isFavorite(selectedProduct.codigo)}
-                        onFavorite={() => toggleFavorite(selectedProduct)}
-                    />
+                    codigo={selectedProduct.codigo}
+                    nome={selectedProduct.nome}
+                    imagem={selectedProduct.imagem}
+                    preco={selectedProduct.preco}
+                    descricao={selectedProduct.descricao}
+                    isFavorite={isFavorite(selectedProduct.codigo)}
+                    onFavorite={() => toggleFavorite(selectedProduct)}
+                />
 
-                <button onClick={closeModal} className="mt-4 cursor-pointer bg-lime-500 text-white px-4 py-2 rounded hover:opacity-75 w-full uppercase font-bold">
+                <button
+                    onClick={closeModal}
+                    className="mt-4 cursor-pointer bg-lime-500 text-white px-4 py-2 rounded hover:opacity-75 w-full uppercase font-bold"
+                >
                     Fechar
                 </button>
             </div>

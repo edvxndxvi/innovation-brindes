@@ -43,7 +43,7 @@ export default function ProductCard({
     return (
         <div className="flex flex-col gap-2 w-full :max-w-[250px]">
             <div className="text-center">
-                <h3 className="font-bold text-lg line-clamp-1">{nome}</h3>
+                <h2 className="font-bold text-lg line-clamp-1">{nome}</h2>
                 <span className="font-medium">{codigo}</span>
             </div>
             <div className="border border-gray-300 rounded-xs">

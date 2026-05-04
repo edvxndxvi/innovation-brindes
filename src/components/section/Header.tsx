@@ -1,9 +1,9 @@
 'use client';
 
-import { Mail, Phone } from "lucide-react";
-import IconButton from "../ui/IconButton";
-import { useAuthStore } from "@/src/store/authStore";
-import UserProfile from "../ui/UserProfile";
+import { Mail, Phone } from 'lucide-react';
+import IconButton from '../ui/IconButton';
+import { useAuthStore } from '@/src/store/authStore';
+import UserProfile from '../ui/UserProfile';
 
 export default function Header() {
     const { user } = useAuthStore();
