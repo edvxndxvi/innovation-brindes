@@ -48,7 +48,7 @@ export default function ProductsSection() {
                     hasMore={hasMore}
                 />
             </div>
-                 {selectedProduct && <Modal />}
+            {selectedProduct && <Modal />}
         </>
     );
 }
