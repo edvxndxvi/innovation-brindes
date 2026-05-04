@@ -41,9 +41,17 @@ Mais adequado para páginas de produtos e mais simples de implementar com dados 
 ### Token apenas em cookie
 Inicialmente o token era salvo em `localStorage`/`sessionStorage` (para a funcionalidade "Manter Logado") e também em cookie (para o middleware). Isso gerou problemas no tratamento de sessão expirada, pois o cookie persistia mesmo após o "logout". A solução foi centralizar o token exclusivamente no cookie, controlando a persistência via `maxAge`.
 
+### Estrutura de pastas
+
+A estrutura foi organizada para separar responsabilidades e facilitar a escalabilidade.
+
+- Rotas (app/) encapsulam suas próprias features e componentes (_components), evitando acoplamento
+- Componentes globais ficam em components/, garantindo reutilização sem poluir o escopo
+- Separação por camadas (services, hooks, store, schemas, types, lib) mantém o código limpo e de facíl manutenção
+
 ---
 
-## ⏳ O que ficou pendente
+## O que ficou pendente
 
 - Testes unitários (Vitest + React Testing Library)
 - Teste E2E com Playwright
@@ -54,13 +62,13 @@ O foco foi entregar todos os requisitos obrigatórios com qualidade, performance
 
 ---
 
-## 📊 Lighthouse (Desktop)
+## Lighthouse (Desktop)
 
 <img width="1919" height="936" alt="image" src="https://github.com/user-attachments/assets/9a3f5890-f3bc-4b7d-9e03-2c6762e72cb0" />
 
 ---
 
-## 🎥 Demonstração
+## Demonstração
 
 https://github.com/user-attachments/assets/1edaf234-3bf3-482e-8fa6-b3f603d6af7d
 
