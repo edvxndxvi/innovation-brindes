@@ -34,7 +34,7 @@ export default function ProductsSection() {
     return (
         <>
             <div className="container py-4 flex flex-col gap-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <SearchInput value={busca} onChange={(e) => setBusca(e.target.value)} />
                     <FavoritesButton onClick={toggleMostrarFavoritos} />
                     <SelectOrder value={ordenar} onChange={setOrdenar} />

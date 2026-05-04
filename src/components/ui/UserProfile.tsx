@@ -7,8 +7,9 @@ interface UserProfileProps {
 export default function UserProfile({ name }: UserProfileProps) {
     const dataHoje = new Date();
     const diaSemana = dataHoje.toLocaleDateString('pt-BR', { weekday: 'long' });
-    const diaCurto = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
-    const dataCompleta = `${diaCurto}, ${dataHoje.toLocaleDateString('pt-BR')}`;
+    const diaCurto = diaSemana.replace('-feira', '');
+    const diaCapitalizado = diaCurto.charAt(0).toUpperCase() + diaCurto.slice(1);
+    const dataCompleta = `${diaCapitalizado}, ${dataHoje.toLocaleDateString('pt-BR')}`;
 
     return (
        <div className="flex items-center">
