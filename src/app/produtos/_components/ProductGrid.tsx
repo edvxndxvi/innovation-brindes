@@ -3,6 +3,7 @@ import ProductCard from './ProductCard';
 import ProductCardSkeleton from './ProductCardSkeleton';
 import { Product } from '@/src/types/interfaces';
 import { useEffect } from 'react';
+import { useFavoritesStore } from '@/src/store/favoriteStore';
 
 interface ProductGridProps {
     products: Product[] | undefined;
@@ -13,8 +14,9 @@ interface ProductGridProps {
     hasMore: boolean;
 }
 
-export default function ProductGrid({ products, isLoading, error, refetch, onLoadMore, hasMore }: ProductGridProps) {
+export default function ProductGrid({ products, isLoading, error, refetch, onLoadMore, hasMore, }: ProductGridProps) {
     const { ref, inView } = useInView();
+    const { toggleFavorite, isFavorite } = useFavoritesStore();  
     
     const showEmptyMessage = !isLoading && !error && products?.length === 0;
     const showProducts = !isLoading && !error && products && products.length > 0;
@@ -43,6 +45,8 @@ export default function ProductGrid({ products, isLoading, error, refetch, onLoa
                             imagem={product.imagem}
                             preco={product.preco}
                             descricao={product.descricao}
+                            isFavorite={isFavorite(product.codigo)}
+                            onFavorite={() => toggleFavorite(product)}
                         />
                     ))
                 ) : showEmptyMessage ? (

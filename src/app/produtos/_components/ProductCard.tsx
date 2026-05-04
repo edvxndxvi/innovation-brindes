@@ -1,4 +1,4 @@
-import { PackageOpen } from 'lucide-react';
+import { Bookmark, PackageOpen } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProductCardProps {
@@ -7,9 +7,11 @@ interface ProductCardProps {
     imagem: string;
     preco: number;
     descricao: string;
+    onFavorite: () => void;
+    isFavorite: boolean;
 }
 
-export default function ProductCard({ codigo, nome, imagem, preco, descricao }: ProductCardProps) {
+export default function ProductCard({ codigo, nome, imagem, preco, descricao, onFavorite, isFavorite }: ProductCardProps) {
     const cores = [
         'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-400', 'bg-gray-800',
         'bg-orange-500', 'bg-purple-500', 'bg-pink-400', 'bg-teal-500', 'bg-cyan-400',
@@ -54,15 +56,25 @@ export default function ProductCard({ codigo, nome, imagem, preco, descricao }: 
                             ))}
                         </div>
                     </div>
+                    
+                    <div className='flex justify-between'>
+                        <button 
+                            aria-label={`Adicionar produto ${nome} aos favoritos`}
+                            className='cursor-pointer'
+                            onClick={onFavorite}
+                        >
+                            <Bookmark color="#7ccf00" fill={isFavorite ? "#7ccf00" : "none"} className="bg-white w-8 h-8 rounded-full p-1" aria-hidden="true" />
+                        </button>
 
-                    <div className="flex flex-col items-end">
-                        <div>
-                            <p className="text-sm">a partir de</p>
-                            <p className="font-bold text-2xl">
-                                {preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                            </p>
-                        </div>
-                        <p className="text-sm">gerado pela melhor oferta</p>
+                        <div className="flex flex-col items-end">
+                            <div>
+                                <p className="text-sm">a partir de</p>
+                                <p className="font-bold text-2xl">
+                                    {preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                </p>
+                            </div>
+                            <p className="text-sm">gerado pela melhor oferta</p>
+                        </div>  
                     </div>
                 </div>
             </div>
