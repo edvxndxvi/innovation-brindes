@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Innovation Brindes — Teste Front-end
 
-## Getting Started
+Mini-aplicação com autenticação e listagem de produtos, desenvolvida com Next.js, TypeScript, Zustand, React Query e Tailwind CSS.
 
-First, run the development server:
+---
+
+## Como rodar com Docker 
+### Passos
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone o repositório
+git clone <url-do-repositorio>
+cd <nome-do-projeto>
+
+# Suba o container
+BASE_URL=https://apihomolog.innovationbrindes.com.br docker compose up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse: [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Credenciais de acesso:**
+- Usuário: `dinamica`
+- Senha: `123`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Decisões Técnicas
 
-To learn more about Next.js, take a look at the following resources:
+### App Router
+Optei pelo App Router por ser o roteador mais recente do Next.js, oferecendo recursos modernos como Server Components e Server Actions nativamente.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Server Actions para chamadas de API
+Centralizei as chamadas de API em Server Actions. Cada função tem responsabilidade única: saber como chamar o endpoint e normalizar o retorno. O tratamento de erros é feito nas camadas superiores (React Query / componentes).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Zustand para estado global
+Além de ser um requisito obrigatório, o Zustand é uma solução leve, simples e sem boilerplate excessivo comparado a Redux ou Context API.
 
-## Deploy on Vercel
+### Infinite Scroll em vez de paginação tradicional
+Mais adequado para páginas de produtos e mais simples de implementar com dados já carregados em memória.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Token apenas em cookie
+Inicialmente o token era salvo em `localStorage`/`sessionStorage` (para a funcionalidade "Manter Logado") e também em cookie (para o middleware). Isso gerou problemas no tratamento de sessão expirada, pois o cookie persistia mesmo após o "logout". A solução foi centralizar o token exclusivamente no cookie, controlando a persistência via `maxAge`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ⏳ O que ficou pendente
+
+- Testes unitários (Vitest + React Testing Library)
+- Teste E2E com Playwright
+- Placeholder de imagem com fallback
+- Retry/backoff nas requisições
+
+O foco foi entregar todos os requisitos obrigatórios com qualidade, performance e acessibilidade.
+
+---
+
+## 📊 Lighthouse (Desktop)
+
+<img width="1919" height="936" alt="image" src="https://github.com/user-attachments/assets/9a3f5890-f3bc-4b7d-9e03-2c6762e72cb0" />
+
+---
+
+## 🎥 Demonstração
+
+https://github.com/user-attachments/assets/1edaf234-3bf3-482e-8fa6-b3f603d6af7d
+
+
