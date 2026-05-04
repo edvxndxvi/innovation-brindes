@@ -1,8 +1,6 @@
 'use client';
 
-import { getAllProductsRequest, searchProductsRequest } from '@/src/services/products';
 import ProductGrid from './ProductGrid';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import SearchInput from '@/src/components/ui/SearchInput';
 import { useDebounce } from '../../../hooks/useDebounce';
@@ -11,13 +9,12 @@ import { Ordenacao } from '@/src/types/interfaces';
 import { ordenarProdutos } from '@/src/lib/utils';
 import FavoritesButton from '@/src/components/ui/FavoritesButton';
 import { useFavoritesStore } from '@/src/store/favoriteStore';
-import { useRouter } from 'next/navigation';
+import { useProducts } from '@/src/hooks/useProducts';
 
 export default function ProductsSection() {
     const [busca, setBusca] = useState('');
     const buscaDebounced = useDebounce(busca, 400);
     const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
-    const router = useRouter();
     const toggleMostrarFavoritos = () => setMostrarFavoritos((prev) => !prev);
     const { favorites } = useFavoritesStore();
 
@@ -26,20 +23,7 @@ export default function ProductsSection() {
         isLoading,
         error,
         refetch,
-    } = useQuery({
-        queryFn: async () => {
-            try {
-                return buscaDebounced ? await searchProductsRequest(buscaDebounced) : await getAllProductsRequest();
-            } catch (error: unknown) {
-                if (error instanceof Error && error.message.includes('unexpected response')) {
-                    router.push('/login');
-                    return [];
-                }
-                throw error;
-            }
-        },
-        queryKey: ['products', buscaDebounced],
-    });
+    } = useProducts(buscaDebounced);
 
     const [ordenar, setOrdenar] = useState<Ordenacao>('');
     const listaAtual = mostrarFavoritos ? favorites : (products ?? []);
