@@ -4,6 +4,7 @@ import ProductCardSkeleton from './ProductCardSkeleton';
 import { Product } from '@/src/types/interfaces';
 import { useEffect } from 'react';
 import { useFavoritesStore } from '@/src/store/favoriteStore';
+import { useModalStore } from '@/src/store/modalStore';
 
 interface ProductGridProps {
     products: Product[] | undefined;
@@ -17,6 +18,7 @@ interface ProductGridProps {
 export default function ProductGrid({ products, isLoading, error, refetch, onLoadMore, hasMore, }: ProductGridProps) {
     const { ref, inView } = useInView();
     const { toggleFavorite, isFavorite } = useFavoritesStore();  
+    const { openModal } = useModalStore();
     
     const showEmptyMessage = !isLoading && !error && products?.length === 0;
     const showProducts = !isLoading && !error && products && products.length > 0;
@@ -47,6 +49,7 @@ export default function ProductGrid({ products, isLoading, error, refetch, onLoa
                             descricao={product.descricao}
                             isFavorite={isFavorite(product.codigo)}
                             onFavorite={() => toggleFavorite(product)}
+                            onClick={() => openModal(product)}
                         />
                     ))
                 ) : showEmptyMessage ? (
