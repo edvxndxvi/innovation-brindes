@@ -59,8 +59,8 @@ export default function ProductGrid({ products, isLoading, error, refetch, onLoa
                 {/* Error */}
 
                 {error && 
-                    <div className='flex flex-col justify-center items-center'>
-                        <p className='text-center'>Ocorreu um erro ao carregar os produtos.</p>
+                    <div className='flex flex-col justify-center items-center col-span-full'>
+                        <p className='text-center'>Ocorreu um erro ao carregar os produtos. {error.message}</p>
                         <button onClick={() => refetch()} className='bg-blue-500 text-white px-4 py-2 rounded mt-4'>Tentar novamente</button>
                     </div>
                 }

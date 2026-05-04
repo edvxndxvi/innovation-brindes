@@ -33,17 +33,16 @@ export default function LoginForm() {
         setResponseError('');
 
         try {
-            const response = await loginRequest(data.usuario, data.senha);
+            const response = await loginRequest(data.usuario, data.senha, isChecked);
             if (response.status === 0) {
                 setResponseError('Email ou senha inválido.');
                 console.log(responseError);
                 return;
             }
 
-            const { token_de_acesso: token, dados_usuario: user } = response;
-            setLogin(token, user, isChecked);
+            const { dados_usuario: user } = response;
+            setLogin(user, isChecked);
             router.push('/produtos');
-            // Todo: redirecionar para /produtos
         } catch (err: any) {
             setResponseError('Algo deu errado com nosso servidor, tente novamente em alguns minutos.');
         }
