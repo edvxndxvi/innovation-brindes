@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { User } from '../types/interfaces';
 
 interface AuthSate {
     user: User | null;
-    setLogin: (user: User, keepLogged: boolean) => void;
+    setLogin: (user: User) => void;
     setLogout: () => void;
 }
 

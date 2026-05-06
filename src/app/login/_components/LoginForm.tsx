@@ -41,7 +41,7 @@ export default function LoginForm() {
             }
 
             const { dados_usuario: user } = response;
-            setLogin(user, isChecked);
+            setLogin(user);
             router.push('/produtos');
         } catch (err: any) {
             setResponseError('Algo deu errado com nosso servidor, tente novamente em alguns minutos.');
